@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const dataService = require("./data-service.js");
 const csService = require("./cs-service.js");
+const saleService = require("./sale-service.js");
 const jwt = require('jsonwebtoken');
 const passport = require("passport");
 const passportJWT = require("passport-jwt");
@@ -52,6 +53,22 @@ app.use(express.json());
 
 app.get("/api/products", (req,res)=>{
     dataService.getAllProducts().then((data)=>{
+        res.json(data);
+    }).catch(()=>{
+        res.status(500).end();
+    });
+});
+
+app.get("/api/sale/products", (req,res)=>{
+    dataService.getAllProducts().then((data)=>{
+        res.json(data);
+    }).catch(()=>{
+        res.status(500).end();
+    });
+});
+
+app.get("/api/sale", (req,res)=>{
+    saleService.getAllSales().then((data)=>{
         res.json(data);
     }).catch(()=>{
         res.status(500).end();
