@@ -15,4 +15,12 @@ export default function Sales(){
             .then(setRecords)
             .catch((error) => console.error('Error fetching record:', error));
     }, []);
+
+    useEffect(() => {
+        // Fetch products from the API
+        fetch('http://localhost:8080/api/sale/product')
+            .then((res) => res.json())
+            .then(setRecords)
+            .catch((error) => console.error('Error fetching record:', error));
+    }, []);
 }
