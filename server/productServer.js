@@ -6,7 +6,7 @@ const mongoDBConnectionString =
 const Schema = mongoose.Schema;
 
 const productSchema = new Schema({
-  id: Number,
+  PID: Number,
   Title: String,
   distrillery:String,
   image: String,

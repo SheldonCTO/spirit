@@ -1,9 +1,9 @@
 const express = require("express");
 const cors = require("cors");
-const dataService = require("./data-service.js");
-const csService = require("./cs-service.js");
-const saleService = require("./sale-service.js");
-const orderService = require("./order-service.js")
+const productService = require("./productServer.js");
+const csService = require("./csServer.js");
+const storeService = require("./storeServer.js");
+const orderService = require("./orderServer.js")
 const jwt = require('jsonwebtoken');
 const passport = require("passport");
 const passportJWT = require("passport-jwt");
@@ -97,7 +97,7 @@ app.post("/api/login", (req, res) => {
             
             let token = jwt.sign(payload, jwtOptions.secretOrKey);
 
-            res.json({ "message": "login successful", "token": token });
+            res.json({ "message": "login successful", "token": token});
         }).catch((msg) => {
             res.status(422).json({ "message": msg });
         });
