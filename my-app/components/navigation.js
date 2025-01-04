@@ -47,7 +47,41 @@ const handleCategoryClick = (category) => {
           flexDirection: "column",
           alignItems: "center",
         }}>
-       
+       <div className="logoSearchAndLogin" > 
+       <Image src="/logo.png" alt="logo" weight={100} height={400} />
+       <form
+      style={{
+        marginTop: "10px",
+        display: "flex",
+        alignItems: "center",
+      }}
+    >
+      <input
+        type="text"
+        placeholder="搜尋..."
+        style={{
+          padding: "5px",
+          border: "1px solid #ccc",
+          borderRadius: "4px",
+        }}
+      />
+      <button
+        type="submit"
+        style={{
+          marginLeft: "5px",
+          padding: "5px 10px",
+          backgroundColor: "#007bff",
+          color: "#fff",
+          border: "none",
+          borderRadius: "4px",
+          cursor: "pointer",
+        }}
+      >
+        搜尋
+      </button>
+    </form>
+    
+</div>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" >
           <Nav className="me-auto">
