@@ -1,5 +1,5 @@
 import { useAtom } from 'jotai';
-import { cartListAtom } from '@/cart';
+import { cartListAtom } from '@/cartData';
 import Link from "next/link";
 import { Container, Row, Col,Navbar, Nav } from "react-bootstrap";
 import { useRouter } from "next/router";

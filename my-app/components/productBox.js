@@ -1,5 +1,5 @@
 import { useAtom } from "jotai";
-import { cartListAtom } from "@/cart";
+import { cartListAtom } from "@/cartData";
 
 
 export default function ProductBox( props ) {
