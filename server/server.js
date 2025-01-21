@@ -53,7 +53,7 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/api/products", (req,res)=>{
-    dataService.getAllProducts().then((data)=>{
+    productService.getAllProducts().then((data)=>{
         res.json(data);
     }).catch(()=>{
         res.status(500).end();
@@ -61,7 +61,7 @@ app.get("/api/products", (req,res)=>{
 });
 
 app.get("/api/sale/products", (req,res)=>{
-    dataService.getAllProducts().then((data)=>{
+    productService.getAllProducts().then((data)=>{
         res.json(data);
     }).catch(()=>{
         res.status(500).end();
@@ -69,7 +69,7 @@ app.get("/api/sale/products", (req,res)=>{
 });
 
 app.get("/api/sale", (req,res)=>{
-    saleService.getAllSales().then((data)=>{
+    storeService.getAllSales().then((data)=>{
         res.json(data);
     }).catch(()=>{
         res.status(500).end();
@@ -107,7 +107,10 @@ app.use((req, res) => {
     res.status(404).end();
 });
 
-Promise.all([dataService.connect(), csService.connect()])
+
+
+Promise.all([productService.connect(), csService.connect(), 
+     ])
     .then(() => {
         app.listen(HTTP_PORT, () => {
             console.log("API listening on: " + HTTP_PORT);

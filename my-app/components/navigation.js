@@ -48,7 +48,7 @@ const handleCategoryClick = (category) => {
           alignItems: "center",
         }}>
        <div className="logoSearchAndLogin" > 
-       <Image src="/logo.png" alt="logo" weight={100} height={400} />
+      
        <form
       style={{
         marginTop: "10px",
