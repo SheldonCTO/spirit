@@ -39,7 +39,9 @@ const handleCloseModal = () => {
         }}
       >
     
-        <h2 >最新產品</h2>
+        <banner>
+          
+        </banner>
         <div style={{display:'flex'}}>
                     {newProduct.map((product) => (
                         <a key={product.id} onClick={() => handleRowClick(product)} >
