@@ -4,14 +4,13 @@ import Link from "next/link";
 import { Container, Row, Col, Navbar, Nav } from "react-bootstrap";
 import { useRouter } from "next/router";
 import { readToken, removeToken } from "../lib/authenticate";
-import { Container, Navbar, Nav } from "react-bootstrap";
 import Image from "next/image";
 import Navigation from "./navigation";
 
 export default function Layout(props) {
   const [cartList, setCartList] = useAtom(cartListAtom);
   const router = useRouter();
-  let token = readToken();
+  let token = readToken(false);
 
   function logout() {
     removeToken();
@@ -46,19 +45,18 @@ export default function Layout(props) {
               <Image
                 src="/logo.png"
                 alt="Logo"
-                
                 width={150}
-                height="auto"
+                height={30}
                 priority
               />
             </div>
-            {token && (
-              <Link href="/cart" passHref legacyBehavior>
+            {/* {token && (
+              <Link href="./cart" passHref legacyBehavior>
                 <Nav.Link>
                   Shopping Cart <span>({cartList.length})</span>
                 </Nav.Link>
               </Link>
-            )}
+            )} */}
             {!token && (
               <Link href="/login" passHref legacyBehavior>
                 <Nav.Link>Login</Nav.Link>
@@ -75,8 +73,8 @@ export default function Layout(props) {
           alignItems: "center",
         }}
       >
-        <br></br>
-
+     
+     <br /> <br /> <br />
         <Navigation></Navigation>
         <br />
         <Container>
