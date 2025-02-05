@@ -23,24 +23,11 @@ export default function Layout(props) {
       <Navbar
         bg="light"
         expand="lg"
-        style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 1000 }}
+        style={{ position: "fixed", top: 0, left: 20, right:20, zIndex: 1000,  display:"flex", justifyContent:"space-between"}}
       >
-        <div
-          class="col-lg-max"
-          style={{
-            whitespace: "nowrap",
-            backgroundColor: "#d3736d",
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
-          <p
-            class="card-title"
-            style={{ whitespace: "nowrap", backgroundColor: "#d3736d" }}
-          >
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alcohol Express
-          </p>
-          <Nav className="ml-auto">
+        
+        
+          <Nav className="ml-auto" >
             <div className="logo">
               <Image
                 src="/logo.png"
@@ -50,6 +37,7 @@ export default function Layout(props) {
                 priority
               />
             </div>
+            </Nav>
             {/* {token && (
               <Link href="./cart" passHref legacyBehavior>
                 <Nav.Link>
@@ -57,14 +45,18 @@ export default function Layout(props) {
                 </Nav.Link>
               </Link>
             )} */}
+            <Nav>
+
+            
             {!token && (
               <Link href="/login" passHref legacyBehavior>
                 <Nav.Link>Login</Nav.Link>
               </Link>
             )}
             {token && <Nav.Link onClick={logout}>Logout</Nav.Link>}
+           
           </Nav>
-        </div>
+        
       </Navbar>
       <div
         style={{

@@ -9,26 +9,27 @@ export default function Navigation(props) {
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
+          color: "white" 
         }}
       >
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto" >
             <Link href="/" passHref legacyBehavior>
-              <Nav.Link>主頁&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;</Nav.Link>
+              <Nav.Link style={{ color: "white" }}>主頁&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;</Nav.Link>
             </Link>
             <Link href="/sales" passHref legacyBehavior>
-              <Nav.Link>購買產品&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;</Nav.Link>
+              <Nav.Link style={{ color: "white" }}>購買產品&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;</Nav.Link>
             </Link>
 
             <Link href="/payment" passHref legacyBehavior>
-              <Nav.Link>付款方式&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;</Nav.Link>
+              <Nav.Link style={{ color: "white" }}>付款方式&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;</Nav.Link>
             </Link>
             <Link href="/location" passHref legacyBehavior>
-              <Nav.Link>合作店戶&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;</Nav.Link>
+              <Nav.Link style={{ color: "white" }}>合作店戶&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;</Nav.Link>
             </Link>
             <Link href="/contact" passHref legacyBehavior>
-              <Nav.Link>聯絡我們&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;</Nav.Link>
+              <Nav.Link style={{ color: "white" }}>聯絡我們&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;</Nav.Link>
             </Link>
 
             <form
