@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import Modal from '../components/modal';
 import ProductBox from '../components/productBox';
 import { readToken } from "@/lib/authenticate";
+import Tab from 'react-bootstrap/Tab';
+import Tabs from 'react-bootstrap/Tabs';
+
 
 export default function Products() {
     const [products, setProducts] = useState([]);

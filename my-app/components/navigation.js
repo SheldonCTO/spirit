@@ -7,8 +7,9 @@ export default function Navigation(props) {
       <Container
         style={{
           display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
+          justifyContent:"space-around",
+          
+          
           color: "white" 
         }}
       >

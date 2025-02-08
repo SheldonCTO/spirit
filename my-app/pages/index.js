@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import styles from "@/styles/Home.module.css";
-
+import { Button, Card } from "react-bootstrap";
 import Carousel from "react-bootstrap/Carousel";
 
 import Link from "next/link";
@@ -41,52 +41,84 @@ export default function Home() {
                 <Image
                   src="/head.jpg"
                   alt="banner"
-                  width={150}
-                  height={100} // Provide some numeric values as a fallback
-                  style={{ height: "auto", width: "150px" }}
+                  width={500}
+                  height={300} // Provide some numeric values as a fallback
+             style={{ height: "auto", width: "500px" }}
                   priority
                 />
-                <Carousel.Caption>
-                  <h3>First slide label</h3>
-                  <p>
-                    Nulla vitae elit libero, a pharetra augue mollis interdum.
-                  </p>
-                </Carousel.Caption>
+               
               </Carousel.Item>
               <Carousel.Item>
                 <Image
                   src="/idea.jpg"
                   alt="banner"
-                  width={150}
-                  height={100} // Provide some numeric values as a fallback
-                  style={{ height: "auto", width: "150px" }}
+                  width={500}
+                  height={300} // Provide some numeric values as a fallback
+                  style={{ height: "auto", width: "500px" }}
                   priority
                 />
-                <Carousel.Caption>
-                  <h3>Second slide label</h3>
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  </p>
-                </Carousel.Caption>
+               
               </Carousel.Item>
               <Carousel.Item>
                 <Image
                   src="/party.jpg"
                   alt="banner"
-                  width={150}
-                  height={100} // Provide some numeric values as a fallback
-                  style={{ height: "auto", width: "150px" }}
+                  width={500}
+                  height={300}// Provide some numeric values as a fallback
+                  style={{ height: "auto", width: "500px" }}
                   priority
                 />
                 <Carousel.Caption>
-                  <h3>Third slide label</h3>
-                  <p>
-                    Praesent commodo cursus magna, vel scelerisque nisl
-                    consectetur.
-                  </p>
+                  <h3>Event Delivery</h3>
+                  
                 </Carousel.Caption>
               </Carousel.Item>
             </Carousel>
+            <br />
+            <Button href="./product">馬上訂購</Button>
+            <br /><br />
+            <div className="mainProductCard"
+            style={{display:"flex"}}>
+              <div className="newProduct">
+              <Card style={{ width: '25rem' }}>
+      <Card.Img variant="top" src="/dalmore50.jpg" />
+      <Card.Body>
+        <Card.Title>Card Title</Card.Title>
+        <Card.Text>
+          Distrillary: Dalmore
+
+        </Card.Text>
+        <Button variant="primary">加入購物籃</Button>
+      </Card.Body>
+    </Card>
+              </div>&nbsp;
+              <div className="allProduct"
+               style={{display:"flex", weight:"40px"}}>
+              <Card style={{ width: '10rem', height:'15rem' }}>
+      <Card.Img variant="top" src="/baijiu.jpeg" />
+      <Card.Body>
+       
+        <Button variant="primary">加入購物籃</Button>
+      </Card.Body>
+    </Card>
+    &nbsp;
+    <Card style={{ width: '10rem', height:'15rem' }}>
+      <Card.Img variant="top" src="/beer.jpeg" />
+      <Card.Body>
+       
+        <Button variant="primary">加入購物籃</Button>
+      </Card.Body>
+    </Card>
+    &nbsp;
+    <Card style={{ width: '10rem', height:'15rem' }}>
+      <Card.Img variant="top" src="/gin.jpeg" />
+      <Card.Body>
+       
+        <Button variant="primary">加入購物籃</Button>
+      </Card.Body>
+    </Card>
+              </div>
+            </div>
             {/* <div style={{display:'flex'}}>
                     {newProduct.map((product) => (
                         <a key={product.id} onClick={() => handleRowClick(product)} >
