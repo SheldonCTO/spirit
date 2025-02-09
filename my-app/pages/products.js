@@ -4,9 +4,10 @@ import ProductBox from '../components/productBox';
 import { readToken } from "@/lib/authenticate";
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-
+import { useRouter } from 'next/router';
 
 export default function Products() {
+    const router = useRouter();
     const [products, setProducts] = useState([]);
     const [selectedProduct, setSelectedProduct] = useState(null);
    
@@ -32,40 +33,67 @@ export default function Products() {
    
 
 
-
     return (
-        <div className="container">
-            <table className="table">
-                <thead>
-                    <tr>
-                        <th scope="col" style={{width:"200px"}}>Title</th>
-                        <th scope="col"style={{width:"70px"}}>Price</th>
-                        <th scope="col">Image</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {products.map((product) => (
-                        <a key={product.id} onClick={() => handleRowClick(product)}>
-                            <img src={product.image} alt={product.title} style={{ width: '100px', height: 'auto' }} />
-                            <p style={{width:"200px"}}>{product.Title}</p>
-                            <p style={{width:"70px"}}>{product.distrillery}</p>
-                            <p style={{width:"70px"}}>{product.capacity}</p>
-                            <p style={{width:"70px"}}>{product.alc}%</p>
-                            
-                        </a>
-                    ))}
-                </tbody>
-            </table>
-            {selectedProduct && (
-                <Modal onClose={handleCloseModal}>
-                    <ProductBox product={selectedProduct} />
-                </Modal>
-            )}
-            {/* {showLoginSuccessModal && (
-                <Modal id="Login-Success" show={showLoginSuccessModal} onClose={handleLoginClose}>
-                    <div>Login Success!</div>
-                </Modal>
-            )} */}
-        </div>
+<>
+        <Tabs
+      defaultActiveKey="profile"
+      id="uncontrolled-tab-example"
+      className="mb-3">
+         <Tab eventKey="whisky" title="威士忌">
+   
+     
+         {products
+    .filter((product) => product.category === "whisky") // for the whisky tab
+    .map((product) => (
+        <a key={product.id} onClick={() => handleRowClick(product)}>
+            <img src={product.image} alt={product.title} style={{ width: '100px', height: 'auto' }} />
+            <p style={{ width: "200px" }}>{product.Title}</p>
+            <p style={{ width: "70px" }}>{product.distrillery}</p>
+            <p style={{ width: "70px" }}>{product.capacity}</p>
+            <p style={{ width: "70px" }}>{product.alc}%</p>
+        </a>
+    ))}
+      </Tab>
+
+      <Tab eventKey="brandy" title="白蘭地">
+      {products
+    .filter((product) => product.category === "brandy") // for the whisky tab
+    .map((product) => (
+        <a key={product.id} onClick={() => handleRowClick(product)}>
+            <img src={product.image} alt={product.title} style={{ width: '100px', height: 'auto' }} />
+            <p style={{ width: "200px" }}>{product.Title}</p>
+            <p style={{ width: "70px" }}>{product.distrillery}</p>
+            <p style={{ width: "70px" }}>{product.capacity}</p>
+            <p style={{ width: "70px" }}>{product.alc}%</p>
+        </a>
+    ))}
+      </Tab>
+      <Tab eventKey="beer" title="啤酒">
+      {products
+    .filter((product) => product.category === "beer") // for the whisky tab
+    .map((product) => (
+        <a key={product.id} onClick={() => handleRowClick(product)}>
+            <img src={product.image} alt={product.title} style={{ width: '100px', height: 'auto' }} />
+            <p style={{ width: "200px" }}>{product.Title}</p>
+            <p style={{ width: "70px" }}>{product.distrillery}</p>
+            <p style={{ width: "70px" }}>{product.capacity}</p>
+            <p style={{ width: "70px" }}>{product.alc}%</p>
+        </a>
+    ))}
+      </Tab>
+              
+             
+                   
+           
+    
+            
+        
+        </Tabs>  {selectedProduct && (
+            <Modal onClose={handleCloseModal}>
+                <ProductBox product={selectedProduct} />
+            </Modal>
+        )}
+        </>
     );
+   
 }
