@@ -63,7 +63,7 @@ export default function Products() {
                     <p style={{ width: "70px" }}>{product.capacity}</p>
                     <p style={{ width: "70px" }}>{product.alc}%</p>
                   </Card.Text>
-                  <Button variant="primary" onClick={(e) => addToCart(product)}>加入購物籃</Button>
+                  
                   </Card.Body>
                 </a>
               </Card>
@@ -90,7 +90,7 @@ export default function Products() {
                   <p style={{ width: "70px" }}>{product.capacity}</p>
                   <p style={{ width: "70px" }}>{product.alc}%</p>
                 </Card.Text>
-                <Button variant="primary" onClick={(e) => addToCart(product)}>加入購物籃</Button>
+                
                 </Card.Body>
               </a>
             </Card>
@@ -116,7 +116,7 @@ export default function Products() {
                   <p style={{ width: "70px" }}>{product.capacity}</p>
                   <p style={{ width: "70px" }}>{product.alc}%</p>
                 </Card.Text>
-                <Button variant="primary" onClick={(e) => addToCart(product)}>加入購物籃</Button>
+
                 </Card.Body>
               </a>
             </Card>
