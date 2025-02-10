@@ -6,15 +6,14 @@ import Tab from "react-bootstrap/Tab";
 import Card from "react-bootstrap/Card";
 import Tabs from "react-bootstrap/Tabs";
 import { useRouter } from "next/router";
-import { useAtom } from 'jotai';
-import { cartListAtom } from '@/store';
+
 
 
 export default function Products() {
   const router = useRouter();
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [cartList, setCartList] = useAtom(cartListAtom);
+
 
   useEffect(() => {
     // Fetch products from the API
@@ -33,9 +32,7 @@ export default function Products() {
   const handleCloseModal = () => {
     setSelectedProduct(null);
   };
-  function addToCart(product) {
-    setCartList((prevCartList) => [...prevCartList, product]);
-  }
+  f
   return (
     <>
       <Tabs
