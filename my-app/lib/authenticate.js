@@ -26,11 +26,11 @@ export function removeToken(){
   localStorage.removeItem('access_token');
 }
 
-export async function authenticateUser(user, password) {
+export async function authenticateUser(email, password) {
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/login`, {
     method: "POST",
-    body: JSON.stringify({ userName: user, password: password }),
+    body: JSON.stringify({ email: email, password: password }),
     headers: {
       "content-type": "application/json"
     }
@@ -46,11 +46,11 @@ export async function authenticateUser(user, password) {
   } 
 }
 
-export async function newUser(user, password, password2, fullName) {
+export async function newUser(email, password, password2, fullName) {
 
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/register`, {
     method: "POST",
-    body: JSON.stringify({ userName: user, password: password, password2:password2,fullName:fullName  }),
+    body: JSON.stringify({ email: email, password: password, password2:password2,fullName:fullName  }),
     headers: {
       "content-type": "application/json"
     }
