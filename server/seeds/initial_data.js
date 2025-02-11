@@ -19,9 +19,9 @@ export async function seed(knex) {
     await knex('users').del();
 
     await knex('users').insert([
-      { first_name: 'John', last_name: 'Doe', email: 'john.doe@example.com', password: '$2b$10$SdO/ZzaRiBCjBg7smRM3cOViXGYWrs9jwWS090cFZkwzNX3rLlBYO', role: 'customer' },
-      { first_name: 'Jane', last_name: 'Smith', email: 'jane.smith@example.com', password: '$2b$10$SdO/ZzaRiBCjBg7smRM3cOViXGYWrs9jwWS090cFZkwzNX3rLlBYO', role: 'store' },
-      { first_name: 'Admin', last_name: 'User', email: 'admin@example.com', password: '$2b$10$SdO/ZzaRiBCjBg7smRM3cOViXGYWrs9jwWS090cFZkwzNX3rLlBYO', role: 'admin' }
+      { first_name: 'John', last_name: 'Doe', email: 'john.doe@example.com', password: '$2b$10$SdO/ZzaRiBCjBg7smRM3cOViXGYWrs9jwWS090cFZkwzNX3rLlBYO', role: 'customer', verified: '1' },
+      { first_name: 'Jane', last_name: 'Smith', email: 'jane.smith@example.com', password: '$2b$10$SdO/ZzaRiBCjBg7smRM3cOViXGYWrs9jwWS090cFZkwzNX3rLlBYO', role: 'store', verified: '1'  },
+      { first_name: 'Admin', last_name: 'User', email: 'admin@example.com', password: '$2b$10$SdO/ZzaRiBCjBg7smRM3cOViXGYWrs9jwWS090cFZkwzNX3rLlBYO', role: 'admin', verified: '1'  }
     ]);
 
     await knex('stores').insert([

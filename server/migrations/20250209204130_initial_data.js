@@ -11,6 +11,7 @@ export async function up(knex) {
       table.string('email', 255).notNullable();
       table.string('password', 255).notNullable();
       table.enu('role', ['customer', 'store', 'admin']).notNullable();
+      table.boolean('verified').defaultTo(0);
       table.timestamp('created_at').defaultTo(knex.fn.now());
     })
     .createTable('stores', function(table) {

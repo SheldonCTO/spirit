@@ -1,7 +1,8 @@
 import bcrypt from 'bcrypt';
 import pool from '../utils/db.js';
-import { signToken } from '../utils/jwt.js';
+import { signToken, generateVerificationToken } from '../utils/jwt.js';
 import { hashPassword } from '../utils/hashedPassword.js';
+import EmailVerificationController from '../controllers/emailVerificationController.js';
 
 class AuthService {
     constructor() {
@@ -18,16 +19,13 @@ class AuthService {
 
             await this.pool.query(query, values);
 
+            const token = generateVerificationToken(user);
+            await EmailVerificationController.sendVerificationEmail(user, token);
+
             const [userResults] = await this.pool.query('SELECT * FROM users WHERE email = ?', [email]);
             const user = userResults[0];
 
-            const payload = {
-                id: user.id,
-                email: user.email,
-                role: user.role
-            };
-            const token = signToken(payload);
-            return { message: 'User registered successfully', token };
+            return { message: 'User registered successfully. Please check your email to verify your account.' };
         } catch (error) {
             throw new Error('Error registering user: ' + error.message);
         }
