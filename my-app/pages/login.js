@@ -8,7 +8,7 @@ import styles from "@/styles/Home.module.css";
 export default function Login(props) {
 
   const [warning, setWarning] = useState("");
-  const [user, setUser] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
 
@@ -16,8 +16,8 @@ export default function Login(props) {
     e.preventDefault();
 
     try{
-      await authenticateUser(user, password);
-      router.push("/products");
+      await authenticateUser(email, password);
+      
     }catch(err){
      setWarning(err.message);
     }
@@ -38,7 +38,7 @@ export default function Login(props) {
       <Form onSubmit={handleSubmit}>
         <Form.Group >
           <Form.Label>User:</Form.Label>
-          <Form.Control type="text" value={user} id="userName" name="userName" onChange={e => setUser(e.target.value)} />
+          <Form.Control type="text" value={email} id="email" name="email" onChange={e => setUser(e.target.value)} />
         </Form.Group>
         <br />
         <Form.Group>
