@@ -2,12 +2,16 @@ import { useAtom } from 'jotai';
 import { cartListAtom } from '@/cartData';
 import { useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
+import { readToken, removeToken } from "../lib/authenticate";
 
 export default function Cart() {
   const [cartList, setCartList] = useAtom(cartListAtom);
   const [isLoading, setIsLoading] = useState(false); // To manage loading state while confirming order
   const [deliveryOption, setDeliveryOption] = useState('pickup'); // To track delivery/pickup selection
   const [deliveryAddress, setDeliveryAddress] = useState(''); // To track delivery address
+  
+  let token = readToken(false);
+
 
   // Handle order confirmation
   const handleConfirmOrder = async () => {
@@ -102,14 +106,18 @@ export default function Cart() {
         )}
       </Form>
 
-      {/* Confirm Order Button */}
-      <Button
+      {token?  <Button
         onClick={handleConfirmOrder}
         variant="primary"
         disabled={isLoading || cartList.length === 0 || (deliveryOption === 'delivery' && !deliveryAddress)}
       >
         {isLoading ? 'Confirming Order...' : 'Confirm Order'}
-      </Button>
+      </Button> :
+              <Link href="/login" passHref legacyBehavior>
+                <Nav.Link>Login</Nav.Link>
+              </Link>
+           }
+     
     </div>
   );
 }

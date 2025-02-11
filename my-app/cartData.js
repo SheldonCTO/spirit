@@ -1,30 +1,29 @@
-
 import { atom } from "jotai";
 
-//Define an atom to store the selected ID
-export const selectedIdAtom = atom(null);
+// Initialize the cart from local storage if available
+const savedCart = typeof window !== "undefined" ? JSON.parse(localStorage.getItem("cart")) || [] : [];
 
-async function fetchProductData(selectedId) {
-  try {
-    const response = await fetch(`https://fakestoreapi.com/products/${selectedId}`);
-    if (!response.ok) {
-      throw new Error(`Failed to fetch product with ID ${selectedId}`);
-    }
-    const productData = await response.json();
-    return productData;
-  } catch (error) {
-    console.error("Error fetching product data:", error);
-    return null;
-  }
-}
+export const cartListAtom = atom(savedCart);
 
-//export const cartListAtom = atom([]);
-export const cartListAtom = atom(async (get) => {
-  const selectedId = get(selectedIdAtom);
-  if (selectedId !== null) {
-    const productData = await fetchProductData(selectedId);
-    return productData ? [productData] : [];
-  } else {
-    return [];
-  }
-});
+// Automatically persist the cart to localStorage when it changes
+cartListAtom.onMount = (setAtom) => {
+  const handleStorageChange = () => {
+    const cart = JSON.parse(localStorage.getItem("cart"));
+    setAtom(cart);
+  };
+
+  // Listen for local storage changes and update the cart
+  window.addEventListener("storage", handleStorageChange);
+
+  // Set the initial cart state from localStorage
+  setAtom(savedCart);
+
+  return () => {
+    window.removeEventListener("storage", handleStorageChange);
+  };
+};
+
+// Update the cart to localStorage when the cartListAtom changes
+cartListAtom.onSet = (newCart) => {
+  localStorage.setItem("cart", JSON.stringify(newCart));
+};
