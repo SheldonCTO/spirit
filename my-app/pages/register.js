@@ -41,7 +41,7 @@ export default function SignUp(props) {
   // Function to handle OTP verification
   const verifyOtp = async () => {
     try {
-      const response = await fetch('http://localhost:8080/verify-otp', {
+      const response = await fetch('http://localhost:8080/verify-email', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, otp })
