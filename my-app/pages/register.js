@@ -22,7 +22,7 @@ export default function SignUp(props) {
   // Function to send OTP to the user's email
   const sendOtpEmail = async (email) => {
     try {
-      const response = await fetch('http://localhost:8080/send-otp', {
+      const response = await fetch('http://localhost:8080/send-emai', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email })
