@@ -17,7 +17,7 @@ export default function Login(props) {
 
     try{
       await authenticateUser(email, password);
-      
+      router.push("/products");
     }catch(err){
      setWarning(err.message);
     }
@@ -38,7 +38,7 @@ export default function Login(props) {
       <Form onSubmit={handleSubmit}>
         <Form.Group >
           <Form.Label>User:</Form.Label>
-          <Form.Control type="text" value={email} id="email" name="email" onChange={e => setUser(e.target.value)} />
+          <Form.Control type="text" value={email} id="email" name="email" onChange={e => setEmail(e.target.value)} />
         </Form.Group>
         <br />
         <Form.Group>

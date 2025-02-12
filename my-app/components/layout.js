@@ -50,7 +50,11 @@ export default function Layout(props) {
             
             {!token && (
               <Link href="/login" passHref legacyBehavior>
-                <Nav.Link>Login</Nav.Link>
+                <Nav.Image src="/login.png"
+                alt="login"
+                width={30}
+                height={30}
+                priority/>
               </Link>
             )}
             {token && <Nav.Link onClick={logout}>Logout</Nav.Link>}

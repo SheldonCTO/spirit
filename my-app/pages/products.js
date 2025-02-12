@@ -17,7 +17,7 @@ export default function Products() {
 
   useEffect(() => {
     // Fetch products from the API
-    fetch("http://localhost:8080/api/products")
+    fetch("http://localhost:8080/products")
       .then((res) => res.json())
       .then(setProducts)
       .catch((error) => console.error("Error fetching products:", error));
