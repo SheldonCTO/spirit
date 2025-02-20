@@ -23,44 +23,54 @@ export default function Layout(props) {
       <Navbar
         bg="light"
         expand="lg"
-        style={{ position: "fixed", top: 0, left: 20, right:20, zIndex: 1000,  display:"flex", justifyContent:"space-between"}}
+        style={{
+          position: "fixed",
+          top: 0,
+          left: 20,
+          right: 20,
+          zIndex: 1000,
+          display: "flex",
+          justifyContent: "space-between",
+        }}
       >
-        
-        
-          <Nav className="ml-auto" >
-            <div className="logo">
-              <Image
-                src="/logo.png"
-                alt="Logo"
-                width={150}
-                height={30}
-                priority
-              />
-            </div>
-            </Nav>
-            {/* {token && (
+        <Nav className="ml-auto">
+          <div className="logo">
+            <Image
+              src="/logo.png"
+              alt="Logo"
+              width={150}
+              height={30}
+              priority
+            />
+          </div>
+        </Nav>
+        {/* {token && (
               <Link href="./cart" passHref legacyBehavior>
                 <Nav.Link>
                   Shopping Cart <span>({cartList.length})</span>
                 </Nav.Link>
               </Link>
             )} */}
-            <Nav>
-
-            
-            {!token && (
-              <Link href="/login" passHref legacyBehavior>
-                <Nav.Image src="/login.png"
+        <Nav>
+          {!token && (
+            <Link href="/login" passHref legacyBehavior>
+              <Nav.Image
+                src="/login.png"
                 alt="login"
                 width={30}
                 height={30}
-                priority/>
-              </Link>
-            )}
-            {token && <Nav.Link onClick={logout}>Logout</Nav.Link>}
-           
-          </Nav>
-        
+                priority
+              />
+            </Link>
+          )}
+          {token && (
+            <Link href="/customerDetail" passHref legacyBehavior>
+              <>Welcome: {token.userName}</>
+            </Link>
+          )}
+
+          {token && <Nav.Link onClick={logout}>Logout</Nav.Link>}
+        </Nav>
       </Navbar>
       <div
         style={{
@@ -69,8 +79,7 @@ export default function Layout(props) {
           alignItems: "center",
         }}
       >
-     
-     <br /> <br /> <br />
+        <br /> <br /> <br />
         <Navigation></Navigation>
         <br />
         <Container>
