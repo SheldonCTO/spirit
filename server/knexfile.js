@@ -8,7 +8,10 @@ const config = {
       port: process.env.DB_DEV_PORT,
       user: process.env.DB_DEV_USER,
       password: process.env.DB_DEV_PASSWORD,
-      database: process.env.DB_DEV_NAME
+      database: process.env.DB_DEV_NAME,
+      ssl: {
+        rejectUnauthorized: false
+      }
     },
     pool: {
       min: 2,
@@ -27,7 +30,10 @@ const config = {
       port: process.env.DB_STAGING_PORT,
       user: process.env.DB_STAGING_USER,
       password: process.env.DB_STAGING_PASSWORD,
-      database: process.env.DB_STAGING_NAME
+      database: process.env.DB_STAGING_NAME,
+      ssl: {
+        rejectUnauthorized: false
+      }
     },
     pool: {
       min: 2,
@@ -42,11 +48,14 @@ const config = {
   production: {
     client: 'mysql2',
     connection: {
-      host: process.env.DB_PRO_HOST,
-      port: process.env.DB_PRO_PORT,
-      user: process.env.DB_PRO_USER,
-      password: process.env.DB_PRO_PASSWORD,
-      database: process.env.DB_PRO_NAME
+      host: process.env.DB_PROD_HOST,
+      port: process.env.DB_PROD_PORT,
+      user: process.env.DB_PROD_USER,
+      password: process.env.DB_PROD_PASSWORD,
+      database: process.env.DB_PROD_NAME,
+      ssl: {
+        rejectUnauthorized: false
+      }
     },
     pool: {
       min: 2,

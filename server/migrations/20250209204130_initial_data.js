@@ -8,9 +8,9 @@ export async function up(knex) {
       table.increments('id').primary();
       table.string('first_name', 255);
       table.string('last_name', 255);
-      table.string('email', 255).notNullable();
+      table.string('email', 255).notNullable().unique();
       table.string('password', 255).notNullable();
-      table.enu('role', ['customer', 'store', 'admin']).notNullable();
+      table.enu('role', ['customer', 'store']).notNullable();
       table.boolean('verified').defaultTo(0);
       table.timestamp('created_at').defaultTo(knex.fn.now());
     })
@@ -26,10 +26,13 @@ export async function up(knex) {
     })
     .createTable('products', function(table) {
       table.increments('id').primary();
-      table.integer('store_id').unsigned().references('id').inTable('stores');
       table.string('name', 255).notNullable();
-      table.string('description', 255);
-      table.decimal('price', 10, 2).notNullable();
+      table.text('description');
+      table.string('distillery', 255).notNullable();
+      table.integer('ml').notNullable();
+      table.decimal('alc', 10, 2).notNullable();
+      table.string('category', 255).notNullable();
+      table.string('image', 255).defaultTo('https://placehold.co/200x150');
       table.timestamp('created_at').defaultTo(knex.fn.now());
     })
     .createTable('orders', function(table) {
@@ -51,6 +54,7 @@ export async function up(knex) {
       table.increments('id').primary();
       table.integer('store_id').unsigned().references('id').inTable('stores');
       table.integer('product_id').unsigned().references('id').inTable('products');
+      table.decimal('unit_price', 10, 2).notNullable();
       table.integer('quantity').notNullable();
       table.timestamp('created_at').defaultTo(knex.fn.now());
     })
@@ -61,17 +65,6 @@ export async function up(knex) {
       table.decimal('amount', 10, 2).notNullable();
       table.enu('method', ['credit_card', 'paypal', 'bank_transfer']).notNullable();
       table.enu('status', ['pending', 'completed', 'failed']).notNullable();
-      table.timestamp('created_at').defaultTo(knex.fn.now());
-    })
-    .createTable('categories', function(table) {
-      table.increments('id').primary();
-      table.string('name', 255).notNullable();
-      table.timestamp('created_at').defaultTo(knex.fn.now());
-    })
-    .createTable('product_categories', function(table) {
-      table.increments('id').primary();
-      table.integer('product_id').unsigned().references('id').inTable('products');
-      table.integer('category_id').unsigned().references('id').inTable('categories');
       table.timestamp('created_at').defaultTo(knex.fn.now());
     })
     .createTable('reviews', function(table) {
@@ -118,8 +111,6 @@ export async function down(knex) {
     .dropTableIfExists('coupons')
     .dropTableIfExists('addresses')
     .dropTableIfExists('reviews')
-    .dropTableIfExists('product_categories')
-    .dropTableIfExists('categories')
     .dropTableIfExists('payments')
     .dropTableIfExists('inventories')
     .dropTableIfExists('order_items')

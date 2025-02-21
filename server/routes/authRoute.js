@@ -11,5 +11,6 @@ const authController = new AuthController(authService);
 router.post('/login', authController.login);
 router.post('/register', authController.register);
 router.get('/verify-email', EmailVerificationController.verifyEmail);
+router.get('/send-email', EmailVerificationController.sendVerificationEmail);
 
 export default router;
