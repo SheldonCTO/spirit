@@ -5,7 +5,7 @@ class OrderController {
 
     createOrder = async (req, res) => {
         try {
-            const result = await this.orderService.createOrder(req.body);
+            const result = await this.orderService.createOrder(req, req.body);
             res.json(result);
         } catch (error) {
             res.status(422).json({ message: error.message });
@@ -14,7 +14,7 @@ class OrderController {
 
     getOrdersByUserID = async (req, res) => {
         try {
-            const result = await this.orderService.getOrdersByUserID();
+            const result = await this.orderService.getOrdersByUserID(req);
             res.json(result);
         } catch (error) {
             res.status(422).json({ message: error.message });
@@ -23,7 +23,7 @@ class OrderController {
 
     getOrderById = async (req, res) => {
         try {
-            const result = await this.orderService.getOrderById(req.params.id);
+            const result = await this.orderService.getOrderById(req, req.params.orderId);
             res.json(result);
         } catch (error) {
             res.status(422).json({ message: error.message });

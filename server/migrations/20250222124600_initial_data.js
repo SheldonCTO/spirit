@@ -40,10 +40,11 @@ await knex.schema
     table.increments('id').primary();
     table.integer('user_id').unsigned().references('id').inTable('users');
     table.decimal('total', 10, 2).notNullable();
-    table.string('address1', 255).notNullable();
+    table.enu('delivery_method', ['in-store', 'Standard Shipping']);
+    table.string('address1', 255);
     table.string('address2', 255);
-    table.string('town', 255).notNullable();
-    table.string('city', 255).notNullable();
+    table.string('town', 255);
+    table.string('city', 255);
     table.enu('status', ['pending', 'completed', 'cancelled']).defaultTo('pending');
     table.timestamp('created_at').defaultTo(knex.fn.now());
     })

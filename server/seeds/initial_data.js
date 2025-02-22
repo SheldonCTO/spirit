@@ -29,7 +29,7 @@ export async function seed(knex) {
   ]);
 
   await knex('orders').insert([
-    { id: 1, user_id: 1, total: 49.98, status: 'completed', address1: '123 Main St', address2: 'Apt 1', town: 'Anytown', city: 'Hong Kong'}
+    { id: 1, user_id: 1, total: 101.98, status: 'completed', address1: '123 Main St', address2: 'Apt 1', town: 'Anytown', city: 'Hong Kong', delivery_method: 'Standard Shipping' }
   ]);
 
   await knex('order_items').insert([
