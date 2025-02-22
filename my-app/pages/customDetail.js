@@ -1,6 +1,6 @@
 import { readToken, authenticateUser, } from "@/lib/authenticate";
 import { useState, useEffect } from 'react';
-
+import OrderHistory from "./orderHistory.js"
 import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 
@@ -63,7 +63,9 @@ export default function csDate(){
         </Form>
         </Tab>
 
-        <Tab eventKey="orderRecord" title="訂單記錄"></Tab>
+        <Tab eventKey="orderRecord" title="訂單記錄">
+        <OrderHistory />
+        </Tab>
       </Tabs>
     </>
 
