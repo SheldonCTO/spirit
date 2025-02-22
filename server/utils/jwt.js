@@ -32,3 +32,4 @@ export const generateVerificationToken = (user) => {
 export const initialize = () => passport.initialize();
 export const authenticate = () => passport.authenticate('jwt', { session: false });
 export const signToken = (payload) => jwt.sign(payload, jwtOptions.secretOrKey);
+export const decodeJwt = (token) => jwt.verify(token, jwtOptions.secretOrKey);

@@ -19,13 +19,14 @@ class AuthService {
 
             await this.pool.query(query, values);
 
-            const token = generateVerificationToken(user);
-            await EmailVerificationController.sendVerificationEmail(user, token);
+            const [userResults] = await this.pool.query('SELECT id FROM users WHERE email = ?', [email]);
+            const userId = userResults[0].id;
 
-            const [userResults] = await this.pool.query('SELECT * FROM users WHERE email = ?', [email]);
-            const user = userResults[0];
+            const token = generateVerificationToken(userId, email, role);
 
-            return { message: 'User registered successfully. Please check your email to verify your account.' };
+            EmailVerificationController.sendVerificationEmail(email);
+
+            return { message: 'User registered successfully. Please check your email to verify your account.', token };
         } catch (error) {
             throw new Error('Error registering user: ' + error.message);
         }
