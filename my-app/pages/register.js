@@ -17,7 +17,7 @@ export default function SignUp(props) {
   const router = useRouter();
 
   // Regular expression for validating the password
-  const passwordRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*\W).{8,}$/;
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
 
   // Function to send OTP to the user's email
   const sendOtpEmail = async (email) => {
