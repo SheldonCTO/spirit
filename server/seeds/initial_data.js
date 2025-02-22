@@ -5,7 +5,6 @@
 export async function seed(knex) {
   await knex('order_coupons').del();
   await knex('coupons').del();
-  await knex('addresses').del();
   await knex('reviews').del();
   await knex('payments').del();
   await knex('inventories').del();
@@ -30,12 +29,12 @@ export async function seed(knex) {
   ]);
 
   await knex('orders').insert([
-    { id: 1, user_id: 1, total: 49.98, status: 'completed' }
+    { id: 1, user_id: 1, total: 49.98, status: 'completed', address1: '123 Main St', address2: 'Apt 1', town: 'Anytown', city: 'Hong Kong'}
   ]);
 
   await knex('order_items').insert([
-    { order_id: 1, product_id: 1, price: 19.99, quantity: 20 },
-    { order_id: 1, product_id: 2, price: 29.99, quantity: 20 }
+    { order_id: 1, product_id: 1, price: 100.99, quantity: 2 },
+    { order_id: 1, product_id: 2, price: 100.99, quantity: 2 }
   ]);
 
   await knex('inventories').insert([
@@ -50,11 +49,6 @@ export async function seed(knex) {
   await knex('reviews').insert([
     { user_id: 1, product_id: 1, rating: 5, comment: 'Great product!' },
     { user_id: 2, product_id: 2, rating: 4, comment: 'Good quality.' }
-  ]);
-
-  await knex('addresses').insert([
-    { user_id: 1, address1: '123 Main St', address2: 'Apt 1', city: 'Anytown', state: 'CA', zip: '12345', country: 'USA', type: 'billing' },
-    { user_id: 2, address1: '456 Elm St', address2: '', city: 'Othertown', state: 'NY', zip: '67890', country: 'USA', type: 'shipping' }
   ]);
 
   await knex('coupons').insert([

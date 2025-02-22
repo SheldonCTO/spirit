@@ -6,7 +6,7 @@
     "start": "node server.js",
     "migrate": "npx knex migrate:latest",
     "seed": "npx knex seed:run",
-    "seed:prod": "npx knex seed:run --production"
+    "seed:prod": "npx knex seed:run --env production"
   },
   "dependencies": {
     "bcrypt": "^5.1.1",
