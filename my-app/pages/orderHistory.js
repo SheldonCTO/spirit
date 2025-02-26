@@ -10,7 +10,7 @@ export default function OrderHistory() {
   useEffect(() => {
     async function fetchOrders() {
       try {
-        const res = await fetch("/api/order-history");
+        const res = await fetch("/order-history");
         const data = await res.json();
         setOrders(data.orders);
       } catch (error) {

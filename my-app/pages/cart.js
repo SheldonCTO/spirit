@@ -24,7 +24,7 @@ export default function Cart() {
       };
 
       // Send the order data to the backend
-      const response = await fetch('/api/confirm-order', {
+      const response = await fetch('/confirm-order', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

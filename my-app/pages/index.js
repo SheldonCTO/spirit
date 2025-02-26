@@ -11,7 +11,7 @@ export default function Home() {
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/api/products`)
+    fetch(`http://localhost:8080/products`)
       .then((res) => res.json())
       .then(setNewProd)
 
@@ -119,7 +119,7 @@ export default function Home() {
     </Card>
               </div>
             </div>
-            {/* <div style={{display:'flex'}}>
+            <div style={{display:'flex'}}>
                     {newProduct.map((product) => (
                         <a key={product.id} onClick={() => handleRowClick(product)} >
                             <img src={product.url} alt={product.title} style={{ width: '100px', height: 'auto'}} />
@@ -135,7 +135,7 @@ export default function Home() {
                 <Modal onClose={handleCloseModal}>
                     <ProductBox product={selectedProduct} />
                 </Modal>
-            )} </div> */}
+            )} </div>
           </div>
         </main>
       </>
