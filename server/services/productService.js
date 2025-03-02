@@ -7,8 +7,32 @@ class ProductService {
 
     async getProducts() {
         try {
-            const [results] = await this.pool.query('SELECT * FROM products');
-            return results;
+            const [products] = await this.pool.query('SELECT * FROM products');
+            console.log(products);
+
+            // Fetch inventories for each product
+            for (const product of products) {
+                const [inventory] = await this.pool.query('SELECT store_id, unit_price, quantity FROM inventories WHERE product_id = ?', [product.id]);
+                product.inventory = inventory;
+            }
+
+            // Map products to include inventory data
+            return products.map((productInfo) => {
+                const inventory = productInfo.inventory[0]; // Get the first inventory item
+                return {
+                    productId: productInfo.id,
+                    name: productInfo.name,
+                    description: productInfo.description,
+                    distillery: productInfo.distillery,
+                    ml: productInfo.ml,
+                    alc: productInfo.alc,
+                    category: productInfo.category,
+                    image: productInfo.image,
+                    storeId: inventory ? inventory.store_id : null,
+                    quantity: inventory ? inventory.quantity : null,
+                    unitPrice: inventory ? inventory.unit_price : null
+                };
+            });
         } catch (error) {
             throw new Error('Error listing products: ' + error.message);
         }
