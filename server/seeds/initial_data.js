@@ -29,12 +29,12 @@ export async function seed(knex) {
   ]);
 
   await knex('orders').insert([
-    { id: 1, user_id: 1, total: 101.98, status: 'completed', address1: '123 Main St', address2: 'Apt 1', town: 'Anytown', city: 'Hong Kong', delivery_method: 'Standard Shipping' }
+    { id: 1, user_id: 1, total: 101.98, status: 'completed', address1: '123 Main St', address2: 'Apt 1', town: 'Anytown', city: 'Hong Kong', delivery_method: 'delivery' }
   ]);
 
   await knex('order_items').insert([
-    { order_id: 1, product_id: 1, price: 100.99, quantity: 2 },
-    { order_id: 1, product_id: 2, price: 100.99, quantity: 2 }
+    { order_id: 1, product_id: 1, store_id: 1, price: 100.99, quantity: 2 },
+    { order_id: 1, product_id: 2, store_id: 1, price: 100.99, quantity: 2 }
   ]);
 
   await knex('inventories').insert([

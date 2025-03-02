@@ -7,7 +7,7 @@ class OrderService {
     }
 
     async createOrder(req, data) {
-        const { address1, address2, town, city, productList, total } = data;
+        const { address1, address2, town, city, productList , total } = data;
         const token = req.headers.authorization.split(' ')[1];
         const decoded = decodeJwt(token);
         const userId = decoded.id;
@@ -19,15 +19,16 @@ class OrderService {
 
             const [orderId] = await this.pool.query('SELECT LAST_INSERT_ID() as id');
 
-            const query2 = 'INSERT INTO order_items (order_id, product_id, quantity, price) VALUES ?';
-            const values2 = productList.map((product) => [orderId[0].id, product.id, product.quantity, product.price]);
+            const query2 = 'INSERT INTO order_items (order_id, product_id, store_id, quantity, price) VALUES ?';
+            const values2 = productList.map((product) => [orderId[0].id, product.product_id, product.store_id, product.quantity, product.price]);
             await this.pool.query(query2, [values2]);
 
             for (const product of productList) {
                 const query3 = 'UPDATE inventories SET quantity = quantity - ? WHERE store_id = ? AND product_id = ?';
-                const values3 = [product.quantity, userId, product.id];
+                const values3 = [product.quantity, product.store_id, product.product_id];
                 await this.pool.query(query3, values3);
             }
+
             return { message: 'Order created successfully' };
         } catch (error) {
             throw new Error('Error creating order: ' + error.message);
