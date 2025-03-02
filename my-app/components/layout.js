@@ -6,11 +6,18 @@ import { useRouter } from "next/router";
 import { readToken, removeToken } from "../lib/authenticate";
 import Image from "next/image";
 import Navigation from "./navigation";
+import { useEffect, useState } from "react"; // Import useState and useEffect
 
 export default function Layout(props) {
   const [cartList, setCartList] = useAtom(cartListAtom);
+  const [token, setToken] = useState(null);  // State to store token
   const router = useRouter();
-  let token = readToken(false);
+
+  // Use useEffect to load the token only on the client
+  useEffect(() => {
+    const tokenData = readToken(false);  // Only run on the client
+    setToken(tokenData);  // Set the token state after fetching it
+  }, []);  // This runs once when the component mounts on the client
 
   function logout() {
     removeToken();
@@ -44,34 +51,33 @@ export default function Layout(props) {
             />
           </div>
         </Nav>
-        {/* {token && (
-              <Link href="./cart" passHref legacyBehavior>
-                <Nav.Link>
-                  Shopping Cart <span>({cartList.length})</span>
-                </Nav.Link>
-              </Link>
-            )} */}
+
         <Nav>
+          {/* If not logged in, show login link */}
           {!token && (
             <Link href="/login" passHref legacyBehavior>
-              <Nav.Image
-                src="/login.png"
-                alt="login"
-                width={30}
-                height={30}
-                priority
-              />
+              <Nav.Link>
+                <Image
+                  src="/login.png"
+                  alt="login"
+                  width={30}
+                  height={30}
+                  priority
+                />
+              </Nav.Link>
             </Link>
           )}
+          {/* If logged in, show welcome message and logout link */}
           {token && (
             <Link href="/customerDetail" passHref legacyBehavior>
-              <>Welcome: {token.userName}</>
+              <Nav.Link>Welcome: {token.userName}</Nav.Link>
             </Link>
           )}
 
           {token && <Nav.Link onClick={logout}>Logout</Nav.Link>}
         </Nav>
       </Navbar>
+
       <div
         style={{
           display: "flex",

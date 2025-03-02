@@ -17,7 +17,7 @@ export default function Products() {
 
   useEffect(() => {
     // Fetch products from the API
-    fetch("http://localhost:8080/products")
+    fetch("http://localhost:8080/products/productList")
       .then((res) => res.json())
       .then(setProducts)
       .catch((error) => console.error("Error fetching products:", error));
@@ -32,7 +32,7 @@ export default function Products() {
   const handleCloseModal = () => {
     setSelectedProduct(null);
   };
-  f
+  
   return (
     <>
       <Tabs
@@ -93,9 +93,9 @@ export default function Products() {
             </Card>
             ))}
         </Tab>
-        <Tab eventKey="beer" title="啤酒">
+        <Tab eventKey="Sake" title="清酒">
           {products
-            .filter((product) => product.category === "beer") // for the whisky tab
+            .filter((product) => product.category === "Sake") // for the whisky tab
             .map((product) => (
               <Card style={{ width: "18rem" }}>
               <a key={product.id} onClick={() => handleRowClick(product)}>

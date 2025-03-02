@@ -48,7 +48,7 @@ export default function Navigation(props) {
             <Link href="/" passHref legacyBehavior>
               <Nav.Link style={{ color: "white" }}>主頁&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;</Nav.Link>
             </Link>
-            <Link href="/sales" passHref legacyBehavior>
+            <Link href="/products" passHref legacyBehavior>
               <Nav.Link style={{ color: "white" }}>購買產品&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;</Nav.Link>
             </Link>
 
