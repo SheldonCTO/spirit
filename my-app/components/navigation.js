@@ -15,7 +15,7 @@ export default function Navigation(props) {
       
       // Fetch distillery data from the backend based on the entered searchTerm
       try {
-        const response = await fetch(`http://localhost:8080/api/products/distrillery/${searchTerm}`);
+        const response = await fetch(`http://localhost:8080 /products/distrillery/${searchTerm}`);
         const data = await response.json();
 
         if (response.ok) {

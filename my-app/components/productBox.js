@@ -12,7 +12,7 @@ export default function ProductBox(props) {
   // Fetch the product data including all stores, prices, and inventory details
   useEffect(() => {
     async function fetchProductDetails() {
-      const response = await fetch(`/api/products/${productId}`);
+      const response = await fetch(`/products/${productId}`);
       const data = await response.json();
       setProductData(data);
       // Set the default store selection if available
@@ -91,8 +91,9 @@ export default function ProductBox(props) {
           min="1"
           max={productData.stores.find(store => store.store_name === selectedStore)?.product_quantity || 0}
         />
+        <button onClick={addToCart}>Add to Cart</button>
       </div>
-      <button onClick={addToCart}>Add to Cart</button>
+      
     </div>
   );
 }
