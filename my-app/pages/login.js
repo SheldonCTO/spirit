@@ -37,7 +37,7 @@ export default function Login(props) {
 	 <styles>
       <Form onSubmit={handleSubmit}>
         <Form.Group >
-          <Form.Label>User:</Form.Label>
+          <Form.Label>User Email:</Form.Label>
           <Form.Control type="text" value={email} id="email" name="email" onChange={e => setEmail(e.target.value)} />
         </Form.Group>
         <br />
