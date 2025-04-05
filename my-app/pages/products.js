@@ -102,7 +102,7 @@ export default function Products() {
               <a key={product.id} onClick={() => handleRowClick(product)}>
                 <Card.Img
                   src={product.image}
-                  alt={product.title}
+                  alt={product.name}
                   style={{ width: "100px", height: "auto" }}
                 />
                 <Card.Body>
@@ -110,8 +110,8 @@ export default function Products() {
                   {product.Title}
                 </Card.Title>
                 <Card.Text>
-                  <p style={{ width: "70px" }}>{product.distrillery}</p>
-                  <p style={{ width: "70px" }}>{product.capacity}</p>
+                  <p style={{ width: "70px" }}>{product.distillery}</p>
+                  <p style={{ width: "70px" }}>{product.ml}</p>
                   <p style={{ width: "70px" }}>{product.alc}%</p>
                 </Card.Text>
 

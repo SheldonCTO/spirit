@@ -12,7 +12,7 @@ export default function ProductBox(props) {
   // Fetch the product data including all stores, prices, and inventory details
   useEffect(() => {
     async function fetchProductDetails() {
-      const response = await fetch(`/products/${productId}`);
+      const response = await fetch(`/product/${productId}`);
       const data = await response.json();
       setProductData(data);
       // Set the default store selection if available
@@ -30,8 +30,8 @@ export default function ProductBox(props) {
       setCartList((prevCartList) => [
         ...prevCartList,
         {
-          product_id: productData.product_id,
-          product_name: productData.product_name,
+          product_id: productData.id,
+          product_name: productData.name,
           store_name: selectedStoreData.store_name,
           price: selectedStoreData.product_price,
           quantity: quantity,
@@ -47,7 +47,7 @@ export default function ProductBox(props) {
     <div>
       <img
         src={productData.product_image}
-        alt={productData.product_name}
+        alt={productData.name}
         style={{
           width: "150px",
           height: "auto",
@@ -58,10 +58,10 @@ export default function ProductBox(props) {
         }}
       />
       <p>
-        <strong>Title:</strong> {productData.product_name}
+        <strong>Title:</strong> {productData.name}
       </p>
       <p>
-        <strong>Description:</strong> {productData.product_description}
+        <strong>Description:</strong> {productData.description}
       </p>
       <div>
         <strong>Available Stores:</strong>
