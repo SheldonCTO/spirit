@@ -3,30 +3,55 @@ import { cartListAtom } from "@/cartData";
 import { useState, useEffect } from "react";
 
 export default function ProductBox(props) {
-  const { productId } = props; // Get product ID from props
+  const { productId } = props;
   const [cartList, setCartList] = useAtom(cartListAtom);
   const [productData, setProductData] = useState(null);
+  const [storeData, setStoreData] = useState([]);
+  const [inventoryData, setInventoryData] = useState(null);
   const [selectedStore, setSelectedStore] = useState(null);
   const [quantity, setQuantity] = useState(1);
 
-  // Fetch the product data including all stores, prices, and inventory details
   useEffect(() => {
-    async function fetchProductDetails() {
-      const response = await fetch(`/product/${productId}`);
-      const data = await response.json();
-      setProductData(data);
-      // Set the default store selection if available
-      if (data.stores && data.stores.length > 0) {
-        setSelectedStore(data.stores[0].store_name); // Select the first store by default
+    async function fetchAllData() {
+      try {
+        // Fetch product data first to get inventoryId
+        const productRes = await fetch(`/product/${productId}`);
+        const product = await productRes.json();
+        setProductData(product);
+
+        // Extract inventoryId from product data
+        const inventoryId = product.inventory_id;
+
+        // Fetch store and inventory data in parallel
+        const [storeRes, inventoryRes] = await Promise.all([
+          fetch(`/store/${storeId}`),
+          fetch(`/inventory/${inventoryId}`),
+        ]);
+
+        const stores = await storeRes.json();
+        const inventory = await inventoryRes.json();
+
+        setStoreData(stores);
+        setInventoryData(inventory);
+
+        // Default store selection (based on product.stores, if it still exists)
+        if (product.stores && product.stores.length > 0) {
+          setSelectedStore(product.stores[0].store_name);
+        }
+
+      } catch (error) {
+        console.error("Error fetching data:", error);
       }
     }
 
-    fetchProductDetails();
+    fetchAllData();
   }, [productId]);
 
   function addToCart() {
-    if (selectedStore && quantity > 0) {
-      const selectedStoreData = productData.stores.find(store => store.store_name === selectedStore);
+    if (selectedStore && quantity > 0 && productData) {
+      const selectedStoreData = productData.stores.find(
+        (store) => store.store_name === selectedStore
+      );
       setCartList((prevCartList) => [
         ...prevCartList,
         {
@@ -36,12 +61,12 @@ export default function ProductBox(props) {
           price: selectedStoreData.product_price,
           quantity: quantity,
           total_price: selectedStoreData.product_price * quantity,
-        }
+        },
       ]);
     }
   }
 
-  if (!productData) return null; // If product data isn't loaded, don't render anything
+  if (!productData || !storeData || !inventoryData) return <p>Loading...</p>;
 
   return (
     <div>
@@ -73,8 +98,6 @@ export default function ProductBox(props) {
             {productData.stores.map((store) => (
               <option key={store.store_name} value={store.store_name}>
                 {store.store_name} - ${store.product_price} - Quantity: {store.product_quantity}
-                <br />
-                {store.location}
               </option>
             ))}
           </select>
@@ -89,11 +112,24 @@ export default function ProductBox(props) {
           value={quantity}
           onChange={(e) => setQuantity(Math.max(1, e.target.value))}
           min="1"
-          max={productData.stores.find(store => store.store_name === selectedStore)?.product_quantity || 0}
+          max={
+            productData.stores.find(
+              (store) => store.store_name === selectedStore
+            )?.product_quantity || 0
+          }
         />
         <button onClick={addToCart}>Add to Cart</button>
       </div>
-      
+
+      <div>
+        <strong>Inventory Info:</strong>
+        <pre>{JSON.stringify(inventoryData, null, 2)}</pre>
+      </div>
+
+      <div>
+        <strong>Store Info:</strong>
+        <pre>{JSON.stringify(storeData, null, 2)}</pre>
+      </div>
     </div>
   );
 }
