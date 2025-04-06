@@ -10,14 +10,14 @@ import { useEffect, useState } from "react"; // Import useState and useEffect
 
 export default function Layout(props) {
   const [cartList, setCartList] = useAtom(cartListAtom);
-  const [token, setToken] = useState(null);  // State to store token
+  let token = readToken(); // State to store token
   const router = useRouter();
 
   // Use useEffect to load the token only on the client
-  useEffect(() => {
-    const tokenData = readToken(false);  // Only run on the client
-    setToken(tokenData);  // Set the token state after fetching it
-  }, []);  // This runs once when the component mounts on the client
+  // useEffect(() => {
+  //   let token = readToken();  // Only run on the client
+  //   setToken(token);  // Set the token state after fetching it
+  // }, []);  // This runs once when the component mounts on the client
 
   function logout() {
     removeToken();
@@ -70,7 +70,7 @@ export default function Layout(props) {
           {/* If logged in, show welcome message and logout link */}
           {token && (
             <Link href="/customerDetail" passHref legacyBehavior>
-              <Nav.Link>Welcome: {token.userName}</Nav.Link>
+              <Nav.Link>Welcome: {token.name}</Nav.Link>
             </Link>
           )}
 

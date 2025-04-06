@@ -40,6 +40,30 @@ export default function Products() {
         id="uncontrolled-tab-example"
         className="mb-3"
       >
+       <Tab eventKey="" title="所有產品">
+  {products.map((product) => (
+    <Card style={{ width: "18rem" }} key={product.id}>
+      <a onClick={() => handleRowClick(product)}>
+        <Card.Img
+          src={product.image}
+          alt={product.name}
+          style={{ width: "100px", height: "auto" }}
+        />
+        <Card.Body>
+          <Card.Title style={{ width: "200px" }}>
+            {product.name}
+          </Card.Title>
+          <Card.Text>
+            <p style={{ width: "70px" }}>{product.distillery}</p>
+            <p style={{ width: "70px" }}>{product.ml}</p>
+            <p style={{ width: "70px" }}>{product.alc}%</p>
+          </Card.Text>
+        </Card.Body>
+      </a>
+    </Card>
+  ))}
+</Tab>
+
         <Tab eventKey="Whisky" title="威士忌">
           {products
             .filter((product) => product.category === "Whisky") // for the whisky tab
