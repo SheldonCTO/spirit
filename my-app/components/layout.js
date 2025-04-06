@@ -70,11 +70,17 @@ export default function Layout(props) {
           {/* If logged in, show welcome message and logout link */}
           {token && (
             <Link href="/customerDetail" passHref legacyBehavior>
-              <Nav.Link>Welcome: {token.name}</Nav.Link>
+              <Nav.Link>Welcome: {token.email}</Nav.Link>
             </Link>
           )}
 
-          {token && <Nav.Link onClick={logout}>Logout</Nav.Link>}
+          {token && <Nav.Link onClick={logout}> <Image
+                  src="/logout.png"
+                  alt="logout"
+                  width={30}
+                  height={30}
+                  priority
+                /></Nav.Link>}
         </Nav>
       </Navbar>
 
