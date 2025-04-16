@@ -7,17 +7,14 @@ import Card from "react-bootstrap/Card";
 import Tabs from "react-bootstrap/Tabs";
 import { useRouter } from "next/router";
 
-
-
 export default function Products() {
   const router = useRouter();
   const [products, setProducts] = useState([]);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-
   useEffect(() => {
     // Fetch products from the API
-    fetch("http://localhost:8080/products")
+    fetch("http://localhost:8080/product/productList")
       .then((res) => res.json())
       .then(setProducts)
       .catch((error) => console.error("Error fetching products:", error));
@@ -32,91 +29,112 @@ export default function Products() {
   const handleCloseModal = () => {
     setSelectedProduct(null);
   };
-  f
+
   return (
     <>
       <Tabs
-        defaultActiveKey="profile"
+        defaultActiveKey="all"
         id="uncontrolled-tab-example"
         className="mb-3"
       >
-        <Tab eventKey="whisky" title="威士忌">
+        <Tab eventKey="all" title="所有產品">
+          {products.map((product) => (
+            <Card style={{ width: "18rem" }} key={product.id}>
+              <a onClick={() => handleRowClick(product)}>
+                <Card.Img
+                  src={product.image}
+                  alt={product.name}
+                  style={{ width: "100px", height: "auto" }}
+                />
+                <Card.Body>
+                  <Card.Title style={{ width: "200px" }}>
+                    {product.name}
+                  </Card.Title>
+                  <Card.Text>
+                    <p style={{ width: "70px" }}>{product.distillery}</p>
+                    <p style={{ width: "70px" }}>{product.ml}</p>
+                    <p style={{ width: "70px" }}>{product.alc}%</p>
+                  </Card.Text>
+                </Card.Body>
+              </a>
+            </Card>
+          ))}
+        </Tab>
+
+        <Tab eventKey="Whisky" title="威士忌">
           {products
-            .filter((product) => product.category === "whisky") // for the whisky tab
+            .filter((product) => product.category === "Whisky") // for the whisky tab
             .map((product) => (
               <Card style={{ width: "18rem" }}>
                 <a key={product.id} onClick={() => handleRowClick(product)}>
                   <Card.Img
                     src={product.image}
-                    alt={product.title}
+                    alt={product.name}
                     style={{ width: "100px", height: "auto" }}
                   />
                   <Card.Body>
-                  <Card.Title style={{ width: "200px" }}>
-                    {product.Title}
-                  </Card.Title>
-                  <Card.Text>
-                    <p style={{ width: "70px" }}>{product.distrillery}</p>
-                    <p style={{ width: "70px" }}>{product.capacity}</p>
-                    <p style={{ width: "70px" }}>{product.alc}%</p>
-                  </Card.Text>
-                  
+                    <Card.Title style={{ width: "200px" }}>
+                      {product.name}
+                    </Card.Title>
+                    <Card.Text>
+                      <p style={{ width: "70px" }}>{product.distillery}</p>
+                      <p style={{ width: "70px" }}>{product.ml}</p>
+                      <p style={{ width: "70px" }}>{product.alc}%</p>
+                    </Card.Text>
                   </Card.Body>
                 </a>
               </Card>
             ))}
         </Tab>
 
-        <Tab eventKey="brandy" title="白蘭地">
+        <Tab eventKey="Brandy" title="白蘭地">
           {products
-            .filter((product) => product.category === "brandy") // for the whisky tab
+            .filter((product) => product.category === "Brandy") // for the whisky tab
             .map((product) => (
               <Card style={{ width: "18rem" }}>
-              <a key={product.id} onClick={() => handleRowClick(product)}>
-                <Card.Img
-                  src={product.image}
-                  alt={product.title}
-                  style={{ width: "100px", height: "auto" }}
-                />
-                <Card.Body>
-                <Card.Title style={{ width: "200px" }}>
-                  {product.Title}
-                </Card.Title>
-                <Card.Text>
-                  <p style={{ width: "70px" }}>{product.distrillery}</p>
-                  <p style={{ width: "70px" }}>{product.capacity}</p>
-                  <p style={{ width: "70px" }}>{product.alc}%</p>
-                </Card.Text>
-                
-                </Card.Body>
-              </a>
-            </Card>
+                <a key={product.id} onClick={() => handleRowClick(product)}>
+                  <Card.Img
+                    src={product.image}
+                    alt={product.name}
+                    style={{ width: "100px", height: "auto" }}
+                  />
+                  <Card.Body>
+                    <Card.Title style={{ width: "200px" }}>
+                      {product.name}
+                    </Card.Title>
+                    <Card.Text>
+                      <p style={{ width: "70px" }}>{product.distillery}</p>
+                      <p style={{ width: "70px" }}>{product.ml}</p>
+                      <p style={{ width: "70px" }}>{product.alc}%</p>
+                    </Card.Text>
+                  </Card.Body>
+                </a>
+              </Card>
             ))}
         </Tab>
-        <Tab eventKey="beer" title="啤酒">
+        <Tab eventKey="Sake" title="清酒">
           {products
-            .filter((product) => product.category === "beer") // for the whisky tab
+            .filter((product) => product.category === "Sake") // for the whisky tab
             .map((product) => (
               <Card style={{ width: "18rem" }}>
-              <a key={product.id} onClick={() => handleRowClick(product)}>
-                <Card.Img
-                  src={product.image}
-                  alt={product.title}
-                  style={{ width: "100px", height: "auto" }}
-                />
-                <Card.Body>
-                <Card.Title style={{ width: "200px" }}>
-                  {product.Title}
-                </Card.Title>
-                <Card.Text>
-                  <p style={{ width: "70px" }}>{product.distrillery}</p>
-                  <p style={{ width: "70px" }}>{product.capacity}</p>
-                  <p style={{ width: "70px" }}>{product.alc}%</p>
-                </Card.Text>
-
-                </Card.Body>
-              </a>
-            </Card>
+                <a key={product.id} onClick={() => handleRowClick(product)}>
+                  <Card.Img
+                    src={product.image}
+                    alt={product.name}
+                    style={{ width: "100px", height: "auto" }}
+                  />
+                  <Card.Body>
+                    <Card.Title style={{ width: "200px" }}>
+                      {product.Title}
+                    </Card.Title>
+                    <Card.Text>
+                      <p style={{ width: "70px" }}>{product.distillery}</p>
+                      <p style={{ width: "70px" }}>{product.ml}</p>
+                      <p style={{ width: "70px" }}>{product.alc}%</p>
+                    </Card.Text>
+                  </Card.Body>
+                </a>
+              </Card>
             ))}
         </Tab>
       </Tabs>

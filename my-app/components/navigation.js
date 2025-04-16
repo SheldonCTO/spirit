@@ -15,7 +15,7 @@ export default function Navigation(props) {
       
       // Fetch distillery data from the backend based on the entered searchTerm
       try {
-        const response = await fetch(`http://localhost:8080/api/products/distrillery/${searchTerm}`);
+        const response = await fetch(`http://localhost:8080 /products/distrillery/${searchTerm}`);
         const data = await response.json();
 
         if (response.ok) {
@@ -48,7 +48,7 @@ export default function Navigation(props) {
             <Link href="/" passHref legacyBehavior>
               <Nav.Link style={{ color: "white" }}>主頁&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;</Nav.Link>
             </Link>
-            <Link href="/sales" passHref legacyBehavior>
+            <Link href="/products" passHref legacyBehavior>
               <Nav.Link style={{ color: "white" }}>購買產品&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;</Nav.Link>
             </Link>
 

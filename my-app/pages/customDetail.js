@@ -5,6 +5,7 @@ import Tabs from "react-bootstrap/Tabs";
 import Tab from "react-bootstrap/Tab";
 
 import Link from 'next/link';
+import { Button } from "react-bootstrap";
 
 export default function csDate(){
 
@@ -48,24 +49,16 @@ export default function csDate(){
         <br></br> {token.email}
         <br></br>{token.phone}
         <br></br>{token.address}</>}
+        <Button variant="primary" className="pull-right" type="submit">更改資料</Button>
         </Tab>
 
         <Tab eventKey="orderRecord" title="訂單記錄">
 
         <br></br>
-        <Form>
-        {token.order_id} &nbsp; {token.order_date}
-        
-        <br></br> {token.email}
-        <br></br>{token.phone}
-        <br></br>{token.address}
-        
-        </Form>
+  <OrderHistory />
         </Tab>
 
-        <Tab eventKey="orderRecord" title="訂單記錄">
-        <OrderHistory />
-        </Tab>
+       
       </Tabs>
     </>
 
